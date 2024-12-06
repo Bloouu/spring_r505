@@ -4,18 +4,19 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 public class Article {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_ARTICLE", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "date_publication", nullable = false)
-    private Instant datePublication;
+    private LocalDateTime datePublication;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", nullable = false)
     private Utilisateur idUser;
@@ -23,6 +24,14 @@ public class Article {
     @Lob
     @Column(name = "contenu", nullable = false)
     private String contenu;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getContenu() {
         return contenu;
@@ -40,11 +49,11 @@ public class Article {
         this.idUser = idUser;
     }
 
-    public Instant getDatePublication() {
+    public LocalDateTime getDatePublication() {
         return datePublication;
     }
 
-    public void setDatePublication(Instant datePublication) {
+    public void setDatePublication(LocalDateTime datePublication) {
         this.datePublication = datePublication;
     }
 }
