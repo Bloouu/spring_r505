@@ -24,32 +24,24 @@ public class Utilisateur {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {if (id != null) this.id = id;}
 
-    public String getLogin() {
-        return login;
-    }
+    public String getLogin() {return login;}
 
     public void setLogin(String login) {
-        this.login = login;
+        if (login != null) this.login = login;
     }
 
     public String getMotDePasse() {
         return motDePasse;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
+    public void setMotDePasse(String motDePasse) {if (motDePasse != null) this.motDePasse = motDePasse;}
 
     public String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setRole(String role) { if (role != null) this.role = role;}
 
 }
