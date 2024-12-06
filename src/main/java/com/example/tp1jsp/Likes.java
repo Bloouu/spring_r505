@@ -6,18 +6,18 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "Likes", schema = "db")
-public class Like {
-    @EmbeddedId
-    private LikeId id;
+public class Likes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_likes", nullable = false)
+    private int id;
 
-    @MapsId("idUtilisateur")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_utilisateur", nullable = false)
     private Utilisateur idUtilisateur;
 
-    @MapsId("idArticle")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_article", nullable = false)
     private Article idArticle;
@@ -25,11 +25,11 @@ public class Like {
     @Column(name = "`like`", nullable = false)
     private Boolean like = false;
 
-    public LikeId getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(LikeId id) {
+    public void setId(int id) {
         this.id = id;
     }
 

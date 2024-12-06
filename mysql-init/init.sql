@@ -14,10 +14,11 @@ CREATE TABLE article (
 );
 
 CREATE TABLE likes (
+                       id_likes INT AUTO_INCREMENT PRIMARY KEY,
                        id_utilisateur INT NOT NULL,
                        id_article INT NOT NULL,
                        `like` BOOLEAN NOT NULL,
-                       PRIMARY KEY (id_utilisateur, id_article),
+                       UNIQUE (id_utilisateur, id_article),
                        FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(ID_USER) ON DELETE CASCADE,
                        FOREIGN KEY (id_article) REFERENCES article(ID_ARTICLE) ON DELETE CASCADE
 );

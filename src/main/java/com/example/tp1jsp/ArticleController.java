@@ -52,6 +52,7 @@ public class ArticleController {
         if (details.getDatePublication() != null) {
             a.setDatePublication(details.getDatePublication());
         }
+
         if (details.getContenu() != null && !details.getContenu().isEmpty()) {
             a.setContenu(details.getContenu());
         }
@@ -60,12 +61,9 @@ public class ArticleController {
             if (utilisateurRepository.findById(a.getIdUser().getId()).isEmpty()) {
                 return "Utilisateur non trouvé !";
             }
-            try {
                 a.setIdUser(details.getIdUser());
-            } catch (Exception e) {
-                System.out.println("Utilisateur non trouvé !");
-            }
         }
+
         articleRepository.save(a);
         return "Article " + id + " modifié !";
     }
