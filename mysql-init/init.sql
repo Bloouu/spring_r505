@@ -2,7 +2,7 @@ CREATE TABLE utilisateur (
                              ID_USER INT AUTO_INCREMENT PRIMARY KEY,
                              login VARCHAR(50) NOT NULL UNIQUE,
                              mot_de_passe VARCHAR(255) NOT NULL,
-                             role ENUM('publisher', 'moderator') NOT NULL
+                             role ENUM('ROLE_publisher', 'ROLE_moderator') NOT NULL
 );
 
 CREATE TABLE article (

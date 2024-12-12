@@ -8,50 +8,31 @@ import org.springframework.web.bind.annotation.*;
 public class UtilisateurController {
 
     @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    private UtilisateurService utilisateurService;
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Utilisateur> getAllUtilisateur() {
-        return utilisateurRepository.findAll();
+        return utilisateurService.getAllUtilisateurs();
     }
 
     @GetMapping(path="/get/{id}")
     public @ResponseBody Utilisateur getUtilisateurById(@PathVariable int id) {
-        return utilisateurRepository.findById(id).orElse(null);
+        return utilisateurService.getUtilisateurById(id);
     }
 
     @PostMapping(path="/add")
     public @ResponseBody String addUtilisateur(@RequestBody Utilisateur u) {
-        utilisateurRepository.save(u);
+        utilisateurService.addUtilisateur(u);
         return "Utilisateur enregistré !";
     }
 
     @DeleteMapping(path="/delete/{id}")
     public @ResponseBody String deleteUtilisateur(@PathVariable int id) {
-        if (utilisateurRepository.existsById(id)) {
-            utilisateurRepository.deleteById(id);
-            return "Utilisateur " + id + " supprimé !";
-        }
-        return "Utilisateur " + id + " introuvable";
+            return utilisateurService.deleteUtilisateur(id);
     }
 
     @PutMapping(path="/edit/{id}")
     public @ResponseBody String editUtilisateur(@PathVariable int id, @RequestBody Utilisateur details) {
-        Utilisateur u = utilisateurRepository.findById(id).orElse(null);
-        if (u == null) {
-            return "Utilisateur " +  id + " introuvable";
-        }
-
-        if (details.getLogin() != null && !details.getLogin().isEmpty()) {
-            u.setLogin(details.getLogin());
-        }
-        if (details.getMotDePasse() != null && !details.getMotDePasse().isEmpty()) {
-            u.setMotDePasse(details.getMotDePasse());
-        }
-        if (details.getRole() != null && !details.getRole().isEmpty()) {
-            u.setRole(details.getRole());
-        }
-        utilisateurRepository.save(u);
-        return "Utilisateur " + id + " modifié !";
+        return utilisateurService.editUtilisateur(id, details);
     }
 }
